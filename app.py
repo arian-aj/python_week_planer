@@ -21,6 +21,9 @@ def parse_duration(duration_str):
     else:
         raise ValueError("Unsupported format")
 
+duration = parse_duration(duration_str)
+
+
 def parse_pause(pause_str):
     if "min" in duration_str:
         minutes = int(pause_str.replace("min", ""))
@@ -28,9 +31,14 @@ def parse_pause(pause_str):
     else:
         raise ValueError("Unsupported format")
 
+pause = parse_pause(pause_str)
 
-time = datetime.strptime("09:00", "%H:%M").time()
 
+
+starttime = datetime.strptime("09:00", "%H:%M").time()
+
+start_2 = starttime + duration + pause
+start_3 = start_2 + duration + pause
 
 
 def week_plan() -> str:
@@ -39,6 +47,12 @@ def week_plan() -> str:
         for n in range(3):
             print(str(n + 1) + ". " + random.choice(deeds_array))
             print("duration: " + random.choice(duration_array))
+            if n == 0:
+                print(starttime.strftime("%H:%M"))
+            if n == 1: 
+                print(start_2.strftime("%H:%M"))
+            else:
+                print(start_3.strftime("%H:%M"))
         
     
     return "This is your weekplan"
